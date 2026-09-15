@@ -6,4 +6,4 @@ for i in range(0,len(alumnos)):
         print("Hola Pedro como estas")
 
 
-print("Ahora continuamos")        
+#print("Ahora continuamos")        
