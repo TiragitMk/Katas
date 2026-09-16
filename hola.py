@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 alumnos =  ["Ana","Maria","Pedro","Alfie","Joaquin"]
 
 
