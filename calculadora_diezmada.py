@@ -8,6 +8,7 @@ class CalculadoraPocket():
             "/": lambda x, y: x / y,
             "salir": None
             }
+        self.POSSIBILITIES = set(self.OPERACIONES.keys())
         self.num1 = None
         self.operation = None
         self.num2 = None
@@ -15,7 +16,7 @@ class CalculadoraPocket():
     def __repr__(self):
         return f"{self.num1} {self.operation} {self.num2} = {self.result}"
     
-    def get_numbers(self):
+    def set_numbers(self):
         """
         Toma el input del usuario y asigna a atributos num. Return None.
         """
@@ -28,7 +29,7 @@ class CalculadoraPocket():
                 continue
             break
     
-    def get_operator(self):
+    def set_operator(self):
         """
         Toma el input del usuario y asigna a atributo operation.
         operation se usa como clave en un diccionario, valor siendo la función
@@ -36,18 +37,19 @@ class CalculadoraPocket():
         """
         while True:
             self.operation = input("\nElige un operador válido (+ - * /) o escribe 'salir': ").lower()
-            if self.operation not in self.OPERACIONES.keys:
+            if self.operation not in self.POSSIBILITIES:
                 continue
             break
     
-    def perform_operation(self):
+    def perform_operation(self, operator, n1, n2):
         """
         Aplica operation sobre num1 y num2. Devuelve el resultado.
+        Mira en un diccionario de dispatch, es un aplicador básico con opciones limitadas.
         """
-        if self.OPERACIONES[self.operation]:
-            self.result = self.OPERACIONES[self.operation](self.num1, self.num2)
+        if self.OPERACIONES[operator]:
+            self.result = self.OPERACIONES[operator](n1, n2)
         else:
-            self.result = self.OPERACIONES[self.operation]
+            self.result = self.OPERACIONES[operator]
         
         return self.result
     
@@ -56,17 +58,17 @@ class CalculadoraPocket():
         1 iteración de cálculo + resultados. Consigue los números, el operador, calcula e imprime.
         """
         while True:
-            self.get_numbers()
-            self.get_operator()
+            self.set_numbers()
+            self.set_operator()
             try:
-                self.perform_operation()
+                self.perform_operation(self.operation, self.num1, self.num2)
             except ZeroDivisionError:
                 print("\n¡Me has dado una división entre cero! Volvamos a empezar...\n")
                 continue
             break
 
         if self.result:
-            print("\n", self, "\t ¡Qué divertido, otra vez!")
+            print("\n", self, "\t ¡Qué divertido, otra vez!", "\n"*2)
     
     def whole_loop(self):
         """
