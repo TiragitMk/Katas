@@ -63,6 +63,7 @@ class CalculadoraPocket():
             if not self.result:
                 print("\n", "Entendido maestro :p".center(30))
                 break
-    
-calculadorita = CalculadoraPocket()
-calculadorita.whole_loop()
+
+if __name__ == "__main__":
+    calculadorita = CalculadoraPocket()
+    calculadorita.whole_loop()
