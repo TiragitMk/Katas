@@ -1,7 +1,6 @@
 class CalculadoraPocket():
 
     def __init__(self):
-        self.POSSIBLE_OPS = {"+", "-", "*", "/", "salir"}
         self.OPERACIONES = {
             "+": lambda x, y: x + y,
             "-": lambda x, y: x - y,
@@ -17,7 +16,9 @@ class CalculadoraPocket():
         return f"{self.num1} {self.operation} {self.num2} = {self.result}"
     
     def get_numbers(self):
-        
+        """
+        Toma el input del usuario y asigna a atributos num. Return None.
+        """
         while True:
             try:
                 self.num1 = float(input("Dame un número: "))
@@ -28,13 +29,21 @@ class CalculadoraPocket():
             break
     
     def get_operator(self):
+        """
+        Toma el input del usuario y asigna a atributo operation.
+        operation se usa como clave en un diccionario, valor siendo la función
+        que se aplica a ambos num.
+        """
         while True:
             self.operation = input("\nElige un operador válido (+ - * /) o escribe 'salir': ").lower()
-            if self.operation not in self.POSSIBLE_OPS:
+            if self.operation not in self.OPERACIONES.keys:
                 continue
             break
     
     def perform_operation(self):
+        """
+        Aplica operation sobre num1 y num2. Devuelve el resultado.
+        """
         if self.OPERACIONES[self.operation]:
             self.result = self.OPERACIONES[self.operation](self.num1, self.num2)
         else:
@@ -43,6 +52,9 @@ class CalculadoraPocket():
         return self.result
     
     def calc_loop(self):
+        """
+        1 iteración de cálculo + resultados. Consigue los números, el operador, calcula e imprime.
+        """
         while True:
             self.get_numbers()
             self.get_operator()
@@ -57,6 +69,9 @@ class CalculadoraPocket():
             print("\n", self, "\t ¡Qué divertido, otra vez!")
     
     def whole_loop(self):
+        """
+        Realiza un bucle de calc_loop hasta que se salga manualmente.
+        """
         print("\n", "¡Bienvenido a la calculadorita súper chulita!".center(70), "\n")
         while True:
             self.calc_loop()
