@@ -63,8 +63,13 @@ def mini_calculadora():
             "salir": None
         }
 
-    num1 = float(input("Ingrese el primer número: "))
-    num2 = float(input("Ingrese el segúndo número: "))
+    while True:
+        try: 
+            num1 = float(input("Ingrese el primer número: "))
+            num2 = float(input("Ingrese el segúndo número: "))
+        except ValueError: continue
+        break
+        
 
     while True:
         operation = input("Ingrese el signo de la operación a realizar (+, -, * o /), o salir: ").lower()
@@ -72,12 +77,19 @@ def mini_calculadora():
             break
         print("Signo incorrecto. Pruebe otra vez.")
 
-    result = OPERACIONES[operation](num1, num2)
-    print(result)
+    if OPERACIONES[operation]:
+        result = OPERACIONES[operation](num1, num2)
+        print(result)
+    else:
+        result = OPERACIONES[operation]
+    
     return result
 
 def bucle_calculadora():
     while True:
         resultado = mini_calculadora()
-        if resultado == None:
+        if not resultado:
             break
+
+mini_calculadora()
+bucle_calculadora()
