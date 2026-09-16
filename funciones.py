@@ -47,3 +47,37 @@ except Exception as ex:
     print('deberias ingresar un numero',ex)
 
 print("Fin de las pruebas")
+
+#realizar un programa muestre segun la opcion +(suma), -(resta), *(Multiplicacion), /(Division)
+#de dos numeros ingresados por teclado, nos pedira ingrese el primer numero, ingrese el segundo,
+#ingrese la operacion, el programa debe para solo si al final de la operacion escribo la palabra salir
+
+def mini_calculadora():
+
+    POSSIBLE_OPS = {"+", "-", "*", "/", "salir"}
+    OPERACIONES = {
+            "+": lambda x, y: x + y,
+            "-": lambda x, y: x - y,
+            "*": lambda x, y: x * y,
+            "/": lambda x, y: x / y,
+            "salir": None
+        }
+
+    num1 = float(input("Ingrese el primer número: "))
+    num2 = float(input("Ingrese el segúndo número: "))
+
+    while True:
+        operation = input("Ingrese el signo de la operación a realizar (+, -, * o /), o salir: ").lower()
+        if operation in POSSIBLE_OPS:
+            break
+        print("Signo incorrecto. Pruebe otra vez.")
+
+    result = OPERACIONES[operation](num1, num2)
+    print(result)
+    return result
+
+def bucle_calculadora():
+    while True:
+        resultado = mini_calculadora()
+        if resultado == None:
+            break
